@@ -1,0 +1,12 @@
+[project]
+name = "oficina-backend-sta"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.143.0",
+    "notion-client>=3.1.0",
+    "pydantic-settings>=2.15.0",
+    "uvicorn[standard]>=0.54.0",
+]
