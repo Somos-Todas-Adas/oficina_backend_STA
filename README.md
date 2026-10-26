@@ -18,6 +18,7 @@ A atividade prática será focada no desenvolvimento de 6 endpoints. A arquitetu
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado em sua máquina:
+
 - [Python 3.13 ou superior](https://www.python.org/downloads/)
 - [uv](https://docs.astral.sh/uv/) (Gerenciador de pacotes rápido para Python)
 - Uma conta no [Notion](https://www.notion.so/) com uma integração criada (Internal Integration Token) e conectada à sua página/banco de dados.
@@ -26,6 +27,7 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 
 1. **Clone o repositório:**
    Abra o seu terminal e rode o comando abaixo:
+
    ```bash
    git clone <url-do-seu-repositorio>
    cd <nome-da-pasta-do-repositorio>
@@ -33,18 +35,26 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 
 2. **Instalação das dependências:**
    O projeto utiliza o `uv` para o gerenciamento ágil de pacotes (conforme mapeado no arquivo `uv.lock`). Para instalar todas as bibliotecas necessárias (como `fastapi`, `notion-client`, `pydantic-settings` e `uvicorn`), execute:
+
    ```bash
    uv sync
    ```
 
-   __(Nota: Se você ainda não possui o uv, pode baixar [aqui](https://docs.astral.sh/uv/#__tabbed_1_1))__
-
+   _(Nota: Se você ainda não possui o uv, pode baixar [aqui](https://docs.astral.sh/uv/#__tabbed_1_1))_
 
 3. **Configuração das Variáveis de Ambiente:**
    Na raiz do seu projeto, faça uma cópia do arquivo chamado `.env-example` e adicione as suas credenciais do Notion no arquivo .env:
+
    ```bash
    cp .env-example .env
    ```
+
+_Nota: Siga os passos abaixo para acessar o Token Notion_
+_1. Acesse as configurações do Notion_
+_2. Clique em 'Connections'_
+_3. Clique em 'Add connection'_
+_4. Selecione 'Developer connection', você será redirecionado_
+_5. Clique em 'New connection' e escolha API Token_
 
 ## Executando a Aplicação
 
@@ -54,7 +64,7 @@ Para subir o servidor de desenvolvimento, utilize o Uvicorn por meio do ambiente
 uv run uvicorn main:app --reload
 ```
 
-Com o servidor rodando, a API estará acessível em `http://127.0.0.1:8000`. 
+Com o servidor rodando, a API estará acessível em `http://127.0.0.1:8000`.
 O FastAPI gera a documentação automática interativa (Swagger UI), que você pode acessar em: `http://127.0.0.1:8000/docs`.
 
 ## Instruções da Atividade
@@ -62,6 +72,7 @@ O FastAPI gera a documentação automática interativa (Swagger UI), que você p
 Durante a oficina, você irá trabalhar em uma API estruturada com separação de responsabilidades. Algumas partes do código já virão prontas, outras faremos juntas, e algumas serão o seu desafio para completar!
 
 ### 1. O que já vem pronto
+
 Estes endpoints já estão implementados no projeto para criar páginas e bancos de dados:
 
 ```python
@@ -69,18 +80,22 @@ Estes endpoints já estão implementados no projeto para criar páginas e bancos
 async def create_page(create_page: CreatePage, service: NotionServiceDep):
     return await service.create_page(create_page)
 
+
 @notion_router.post("/databases", status_code=status.HTTP_200_OK)
 async def create_database(create_database: CreateDatabase, service: NotionServiceDep):
     return await service.create_database(create_database)
 ```
 
 ### 2. O que faremos juntas
+
 - **Adicionar linha:** O endpoint responsável por adicionar uma nova linha (registro) ao banco de dados será construído passo a passo com a professora durante a oficina.
 
 ### 3. O que a aluna deve completar
+
 Você encontrará alguns endpoints incompletos no código. O seu desafio é preencher as partes faltando (indicadas por `...`) para que as rotas funcionem corretamente:
 
 **Listar as linhas do banco de dados:**
+
 ```python
 @notion_router.get("/")
 async def list_database_rows(database_id: str, service: ...):
@@ -90,6 +105,7 @@ async def list_database_rows(database_id: str, service: ...):
 ```
 
 **Atualizar um campo específico:**
+
 ```python
 @notion_router.patch("/")
 async def update_row_field(page_id: str, update_data: ..., service: NotionServiceDep):
