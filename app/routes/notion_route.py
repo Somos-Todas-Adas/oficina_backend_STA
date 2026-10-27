@@ -24,9 +24,9 @@ async def create_database(create_database: CreateDatabase, service: NotionServic
 
 
 @notion_router.get("/")
-async def list_database_rows(database_id: str, service: ...):
+async def list_database_rows(data_source_id: str, service: ...):
     """Lista todas as linhas do banco de dados"""
-    linhas = await service.list_rows(database_id)
+    linhas = await service.list_rows(...)
     return ...
 
 

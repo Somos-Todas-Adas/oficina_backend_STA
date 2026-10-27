@@ -15,7 +15,7 @@ class NotionRepository:
         """Usa o SDK oficial para criar a página"""
         return self.notion.databases.create(**payload)
 
-    def get_all_rows(self, database_id: str):
+    def get_all_rows(self, data_source_id: str):
         """Busca todas as páginas contidas em um database (equivalente a 'SELECT *')"""
         return ...
 

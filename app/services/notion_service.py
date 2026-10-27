@@ -1,5 +1,4 @@
-from http.client import HTTPException
-
+from fastapi import HTTPException
 from notion_client import APIResponseError
 
 from app.config.core import settings
@@ -32,9 +31,7 @@ class NotionService:
             return self.repository.new_page_in_notion(payload)
 
         except APIResponseError as erro:
-            raise HTTPException(
-                status_code=400, detail=f"Erro no Notion: {erro.message}"
-            )
+            raise HTTPException(status_code=400, detail=f"Erro no Notion: {erro!s}")
 
         except HTTPException:
             raise HTTPException(status_code=500, detail="Erro interno no servidor.")
@@ -66,14 +63,12 @@ class NotionService:
             return self.repository.new_database_in_notion(payload)
 
         except APIResponseError as erro:
-            raise HTTPException(
-                status_code=400, detail=f"Erro no Notion: {erro.message}"
-            )
+            raise HTTPException(status_code=400, detail=f"Erro no Notion: {erro!s}")
 
         except HTTPException:
             raise HTTPException(status_code=500, detail="Erro interno no servidor.")
 
-    async def list_rows(self, database_id: str):
+    async def list_rows(self, data_source_id: str):
         """Retorna todas as linhas de um database"""
         try:
             response = ...
@@ -102,6 +97,4 @@ class NotionService:
             return ...
 
         except APIResponseError as erro:
-            raise HTTPException(
-                status_code=400, detail=f"Erro no Notion: {erro.message}"
-            )
+            raise HTTPException(status_code=400, detail=f"Erro no Notion: {erro!s}")
